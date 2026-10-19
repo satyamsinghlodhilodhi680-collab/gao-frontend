@@ -5,6 +5,7 @@ import ServiceCard from "../components/ServiceCard";
 import { ArrowRight, MapPin ,Search} from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../services/api"; // optional
 
 
 function Home() {
@@ -16,25 +17,48 @@ function Home() {
 const [searchQuery, setSearchQuery] = useState("");
 const [showSearchResults, setShowSearchResults] = useState(false);
 
+// useEffect(() => {
+//     const fetchVillageInfo = async () => {
+//         try {
+//             const response = await fetch(
+//                 "http://localhost:3000/api/village-info"
+//             );
+
+//             const result = await response.json();
+
+//             if (response.ok && result.success) {
+//                 setVillageInfo(result.data);
+//             }
+//         } catch (error) {
+//             console.error("Failed to fetch village information:", error);
+//         }
+//     };
+
+//     fetchVillageInfo();
+// }, []);
+
+
+
 useEffect(() => {
     const fetchVillageInfo = async () => {
         try {
-            const response = await fetch(
-                "http://localhost:3000/api/village-info"
-            );
+            const response = await api.get("/village-info");
+            const result = response.data;
 
-            const result = await response.json();
-
-            if (response.ok && result.success) {
+            if (result.success) {
                 setVillageInfo(result.data);
             }
         } catch (error) {
-            console.error("Failed to fetch village information:", error);
+            console.error(
+                "Failed to fetch village information:",
+                error.response?.data || error.message
+            );
         }
     };
 
     fetchVillageInfo();
 }, []);
+
 
     const services = [
         {
