@@ -19,7 +19,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://gow-shivvu.onrender.com/api",
+    baseURL: "https://localhost:3000",
     withCredentials: true
 });
 
