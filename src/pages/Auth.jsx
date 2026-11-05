@@ -128,11 +128,9 @@ function Auth() {
 
         if (response.data.success) {
           if (isRegister) {
-            setIsOtpVerification(true);
-            setOtp("");
-            setSuccess(
-              "OTP tumhare email par bhej diya gaya hai. Inbox aur Spam check karo."
-            );
+            setIsOtpVerification(false);
+            setIsRegister(false);
+            setSuccess("Registration successful. You can now login.");
           } else {
             navigate("/");
           }
