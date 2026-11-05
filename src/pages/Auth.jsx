@@ -128,9 +128,13 @@ function Auth() {
 
         if (response.data.success) {
           if (isRegister) {
-            setIsOtpVerification(false);
+            setIsOtpVerification(true);
             setIsRegister(false);
-            setSuccess("Registration successful. You can now login.");
+            setOtp("");
+            setSuccess(
+              response.data.message ||
+                "Verification OTP sent to your email."
+            );
           } else {
             navigate("/");
           }
